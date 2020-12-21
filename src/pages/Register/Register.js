@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Signup from "./../../components/SignUp/SignUp";
 import "./Register.scss";
 
 class Register extends Component {
@@ -7,11 +8,7 @@ class Register extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>Register Component</h1>
-      </div>
-    );
+    return <Signup />;
   }
 }
 
