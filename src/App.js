@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import "./default.scss";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { auth, handleUserProfile } from "./firebase/utils";
-import { setCurrentUser } from "./redux/User/user.actions";
+import { Switch, Route } from "react-router-dom";
+import { checkUserSession } from "./redux/User/user.actions";
 
 // hoc
 import WithAuth from "./hoc/withAuth";
@@ -22,12 +21,9 @@ import { useDispatch } from "react-redux";
 const App = (props) => {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-
-  //   return () => {
-  //     authListener();
-  //   };
-  // }, []);
+  useEffect(() => {
+    dispatch(checkUserSession());
+  }, []);
 
   return (
     <div className="App">
