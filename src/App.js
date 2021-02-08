@@ -22,6 +22,7 @@ import Recovery from "./pages/Recovery/Recovery";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Admin from "./pages/Admin/Admin";
 import AdminToolbar from "./components/AdminToolbar/AdminToolbar";
+import Search from "./pages/Search/Search";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -41,6 +42,14 @@ const App = (props) => {
             <HomepageLayout>
               <Homepage />
             </HomepageLayout>
+          )}
+        />
+        <Route
+          path="/search"
+          render={() => (
+            <MainLayout>
+              <Search />
+            </MainLayout>
           )}
         />
         <Route

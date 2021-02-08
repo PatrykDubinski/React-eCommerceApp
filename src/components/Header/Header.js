@@ -29,14 +29,25 @@ const Header = (props) => {
           </Link>
         </div>
 
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/search">Search</Link>
+            </li>
+          </ul>
+        </nav>
+
         <div className="callToActions">
           {currentUser && (
             <ul>
               <li>
-                <Link to="/dashboard">MY ACCOUT</Link>
+                <Link to="/dashboard">My accout</Link>
               </li>
               <li>
-                <span onClick={() => signOut()}>LOGOUT</span>
+                <span onClick={() => signOut()}>Logout</span>
               </li>
             </ul>
           )}

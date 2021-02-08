@@ -24,6 +24,41 @@
       }
     }
 
+    nav {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+
+      ul,
+      ul li {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      ul {
+        text-align: center;
+
+        li {
+          list-style-type: none;
+          display: inline-block;
+          margin: 0 1rem;
+
+          a {
+            font-size: 1.8rem;
+            line-height: 6.5rem;
+            vertical-align: middle;
+            color: black;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
     .callToActions {
       position: absolute;
       top: 50%;
@@ -42,18 +77,19 @@
         list-style-type: none;
         display: inline-block;
         margin-right: 1.5rem;
-        cursor: pointer;
 
         &:last-child {
           margin-right: 0;
         }
 
-        a {
+        a,
+        span {
           font-size: 1.8rem;
           line-height: 1;
           color: #000;
           text-decoration: none;
           text-transform: uppercase;
+          cursor: pointer;
         }
       }
     }
