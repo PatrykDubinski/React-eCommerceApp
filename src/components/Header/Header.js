@@ -33,10 +33,10 @@ const Header = (props) => {
           {currentUser && (
             <ul>
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/dashboard">MY ACCOUT</Link>
               </li>
               <li>
-                <span onClick={() => signOut()}>Logout</span>
+                <span onClick={() => signOut()}>LOGOUT</span>
               </li>
             </ul>
           )}
