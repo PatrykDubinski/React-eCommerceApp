@@ -5,16 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Logo from "../../assets/logo.png";
 import { signOutUserStart } from "../../redux/User/user.actions";
+import { selectCartItemsCount } from "../../redux/Cart/cart.selectors";
 
-const mapState = ({ user }) => {
+const mapState = (state) => {
   return {
-    currentUser: user.currentUser,
+    currentUser: state.user.currentUser,
+    totalCartItems: selectCartItemsCount(state),
   };
 };
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector(mapState);
+  const { currentUser, totalCartItems } = useSelector(mapState);
 
   const signOut = () => {
     dispatch(signOutUserStart());
@@ -41,27 +43,29 @@ const Header = (props) => {
         </nav>
 
         <div className="callToActions">
-          {currentUser && (
-            <ul>
-              <li>
-                <Link to="/dashboard">My accout</Link>
-              </li>
-              <li>
-                <span onClick={() => signOut()}>Logout</span>
-              </li>
-            </ul>
-          )}
+          <ul>
+            <li>
+              <Link>Your Cart ({totalCartItems})</Link>
+            </li>
 
-          {!currentUser && (
-            <ul>
-              <li>
-                <Link to="/registration">Register</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </ul>
-          )}
+            {currentUser
+              ? [
+                  <li>
+                    <Link to="/dashboard">My account</Link>
+                  </li>,
+                  <li>
+                    <span onClick={() => signOut()}>Logout</span>
+                  </li>,
+                ]
+              : [
+                  <li>
+                    <Link to="/registration">Register</Link>
+                  </li>,
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>,
+                ]}
+          </ul>
         </div>
       </div>
     </header>
