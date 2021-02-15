@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "./ProductCard.scss";
 
 import Button from "../forms/Button/Button";
@@ -16,6 +16,7 @@ const mapState = ({ products }) => ({
 
 const ProductCard = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { product } = useSelector(mapState);
   const { productID } = useParams();
 
@@ -38,6 +39,8 @@ const ProductCard = () => {
     if (!product) return;
 
     dispatch(addToCart(product));
+
+    history.push("/cart");
   };
 
   const configAddToCartBtn = {

@@ -27,3 +27,33 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
     },
   ];
 };
+
+export const handleRemoveFromCart = ({ prevCartItems, cartItemToRemove }) => {
+  return prevCartItems.filter(
+    (item) => item.documentID !== cartItemToRemove.documentID
+  );
+};
+
+export const handleDecreaseCartItem = ({
+  prevCartItems,
+  cartItemToDecrease,
+}) => {
+  const existingCartItem = prevCartItems.find(
+    (cartItem) => cartItem.documentID === cartItemToDecrease.documentID
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return prevCartItems.filter(
+      (cartItem) => cartItem.documentID !== existingCartItem.documentID
+    );
+  }
+
+  return prevCartItems.map((cartItem) =>
+    cartItem.documentID === existingCartItem.documentID
+      ? {
+          ...cartItem,
+          quantity: cartItem.quantity - 1,
+        }
+      : cartItem
+  );
+};

@@ -1,5 +1,9 @@
 import cartTypes from "./cart.types";
-import { handleAddToCart } from "./cart.helpers";
+import {
+  handleAddToCart,
+  handleDecreaseCartItem,
+  handleRemoveFromCart,
+} from "./cart.helpers";
 
 const initialState = {
   cartItems: [],
@@ -13,6 +17,22 @@ const cartReducer = (state = initialState, action) => {
         cartItems: handleAddToCart({
           prevCartItems: state.cartItems,
           nextCartItem: action.payload,
+        }),
+      };
+    case cartTypes.REMOVE_CART_ITEM:
+      return {
+        ...state,
+        cartItems: handleRemoveFromCart({
+          prevCartItems: state.cartItems,
+          cartItemToRemove: action.payload,
+        }),
+      };
+    case cartTypes.DECREASE_CART_ITEM:
+      return {
+        ...state,
+        cartItems: handleDecreaseCartItem({
+          prevCartItems: state.cartItems,
+          cartItemToDecrease: action.payload,
         }),
       };
     default:
