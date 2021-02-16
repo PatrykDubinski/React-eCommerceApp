@@ -15,6 +15,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import HomepageLayout from "./layouts/HomepageLayout";
 
 // pages
+import Payment from "./pages/Payment/Payment";
 import Homepage from "./pages/Homepage/Homepage";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
@@ -77,6 +78,16 @@ const App = (props) => {
             <MainLayout>
               <Cart />
             </MainLayout>
+          )}
+        />
+        <Route
+          path="/payment"
+          render={() => (
+            <WithAuth>
+              <MainLayout>
+                <Payment />
+              </MainLayout>
+            </WithAuth>
           )}
         />
         <Route
