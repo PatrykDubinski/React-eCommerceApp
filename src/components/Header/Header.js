@@ -50,18 +50,18 @@ const Header = (props) => {
 
             {currentUser
               ? [
-                  <li>
+                  <li key={1}>
                     <Link to="/dashboard">My account</Link>
                   </li>,
-                  <li>
+                  <li key={2}>
                     <span onClick={() => signOut()}>Logout</span>
                   </li>,
                 ]
               : [
-                  <li>
+                  <li key={1}>
                     <Link to="/registration">Register</Link>
                   </li>,
-                  <li>
+                  <li key={2}>
                     <Link to="/login">Login</Link>
                   </li>,
                 ]}

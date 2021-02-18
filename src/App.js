@@ -26,6 +26,7 @@ import AdminToolbar from "./components/AdminToolbar/AdminToolbar";
 import Search from "./pages/Search/Search";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
+import Order from "./pages/Order.js/Order";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -120,6 +121,16 @@ const App = (props) => {
             <WithAuth>
               <DashboardLayout>
                 <Dashboard />
+              </DashboardLayout>
+            </WithAuth>
+          )}
+        />
+        <Route
+          path="/order/:orderID"
+          render={() => (
+            <WithAuth>
+              <DashboardLayout>
+                <Order />
               </DashboardLayout>
             </WithAuth>
           )}

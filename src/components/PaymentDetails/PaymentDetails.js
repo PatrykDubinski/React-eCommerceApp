@@ -4,6 +4,7 @@ import { CountryDropdown } from "react-country-region-selector";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { useHistory } from "react-router-dom";
 
 import FormInput from "../forms/FormInput/FormInput";
 import Button from "../forms/Button/Button";
@@ -11,9 +12,10 @@ import { api } from "../../utils/utils";
 import {
   selectCartTotal,
   selectCartItemsCount,
+  selectCartItems,
 } from "../../redux/Cart/cart.selectors";
 import { clearCart } from "../../redux/Cart/cart.actions";
-import { useHistory } from "react-router-dom";
+import { saveOrderHistory } from "../../redux/Orders/orders.actions";
 
 const initialAddressState = {
   line1: "",
@@ -27,6 +29,7 @@ const initialAddressState = {
 const mapState = createStructuredSelector({
   total: selectCartTotal,
   itemsCount: selectCartItemsCount,
+  cartItems: selectCartItems,
 });
 
 const PaymentDetails = () => {
@@ -34,7 +37,7 @@ const PaymentDetails = () => {
   const elements = useElements();
   const dispatch = useDispatch();
   const history = useHistory();
-  const { total, itemsCount } = useSelector(mapState);
+  const { total, itemsCount, cartItems } = useSelector(mapState);
   const [billingAddress, setBillingAddress] = useState({
     ...initialAddressState,
   });
@@ -46,7 +49,7 @@ const PaymentDetails = () => {
 
   useEffect(() => {
     if (itemsCount < 1) {
-      history.push("/");
+      history.push("/dashboard");
     }
   }, [itemsCount]);
 
@@ -115,7 +118,27 @@ const PaymentDetails = () => {
                 payment_method: paymentMethod.id,
               })
               .then(({ paymentIntent }) => {
-                dispatch(clearCart());
+                const configOrder = {
+                  orderTotal: total,
+                  orderItems: cartItems.map((item) => {
+                    const {
+                      documentID,
+                      productThumbnail,
+                      productName,
+                      productPrice,
+                      quantity,
+                    } = item;
+                    return {
+                      documentID,
+                      productThumbnail,
+                      productName,
+                      productPrice,
+                      quantity,
+                    };
+                  }),
+                };
+
+                dispatch(saveOrderHistory(configOrder));
               });
           });
       });
